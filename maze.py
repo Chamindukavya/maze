@@ -48,9 +48,11 @@ class Maze():
                     
                     if maze[i][j] == 'A':
                         self.startPoint = (i,j)
+                        
                         rawWall.append(False)
                     elif maze[i][j] == 'B':
                         self.goal = (i,j)
+                        
                         rawWall.append(False)
                     elif maze[i][j] == ' ':
                         rawWall.append(False)
@@ -98,13 +100,18 @@ class Maze():
                 if i not in visitedNodes and (not frontier.checkForState(i)):
                     # print("I are",i)
                     if (i == self.goal):
-                        print("goal is",self.goal)
-                        self.print(nodeRemoveFromFrontier)
+                        # print("goal is",self.goal)
+                        print("Here is the maze")
+                        self.print(nodeRemoveFromFrontier,0)
+                        print("Starting Point",self.startPoint)
+                        print("Goal",self.goal,)
+                        print("Here is the path")
+                        self.print(nodeRemoveFromFrontier,1)
                         return
                     newNode = Node(i,nodeRemoveFromFrontier)  #given the node as the parent
                     frontier.add(newNode)
 
-    def print(self,node):
+    def print(self,node,var):
         # print(self.maze1)
         # print(node.state)
 
@@ -132,23 +139,15 @@ class Maze():
                     print("A",end="")    
                 elif j=='B':
                     print("B",end="")
-                elif j==" " and (c,r) in path:
+                elif j==" " and (c,r) in path and var==1:
                     print("*",end="")
 
                 else:
                     print(" ",end="")  
-            print("/n")
+            print("",sep="/n")
             r = -1                  
 
-        print((7,13) in path)
-
         
         
-
-
-
-          
-              
-        
-m = Maze(sys.argv[1])  
+m = Maze(sys.argv[1]) #take the system inputs
 m.solve()      
